@@ -1,7 +1,5 @@
 package com.practice.sfgpetclinic.model;
 
-import lombok.Getter;
-
 public class Person {
 
     private String firstName;
