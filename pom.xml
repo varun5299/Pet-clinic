@@ -34,9 +34,9 @@
                 <configuration>
                     <goals>install</goals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <checkModificationExcludes>
-                        <checkModificationExclude>pom.xml</checkModificationExclude>
-                    </checkModificationExcludes>
+<!--                    <checkModificationExcludes>-->
+<!--                        <checkModificationExclude>pom.xml</checkModificationExclude>-->
+<!--                    </checkModificationExcludes>-->
                 </configuration>
             </plugin>
         </plugins>
