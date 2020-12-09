@@ -1,10 +1,7 @@
 package com.practice.sfgpetclinic.bootstrap;
 
 import com.practice.sfgpetclinic.model.*;
-import com.practice.sfgpetclinic.service.OwnerService;
-import com.practice.sfgpetclinic.service.PetTypeService;
-import com.practice.sfgpetclinic.service.SpecialityService;
-import com.practice.sfgpetclinic.service.VetService;
+import com.practice.sfgpetclinic.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
 
@@ -50,9 +49,9 @@ public class DataLoader implements CommandLineRunner {
         Speciality radiology = new Speciality();
         radiology.setDescription("Radiology");
         Speciality dentistry = new Speciality();
-        radiology.setDescription("Dentistry");
+        dentistry.setDescription("Dentistry");
         Speciality surgery = new Speciality();
-        radiology.setDescription("Surgery");
+        surgery.setDescription("Surgery");
 
         Speciality savedRadiology = specialityService.save(radiology);
         Speciality savedDentistry = specialityService.save(dentistry);
@@ -87,10 +86,19 @@ public class DataLoader implements CommandLineRunner {
         shivikaPet.setOwner(owner2);
         shivikaPet.setName("Kiwi");
         shivikaPet.setBirthDate(LocalDate.now());
-        owner1.getPets().add(shivikaPet);
+        owner2.getPets().add(shivikaPet);
         ownerService.save(owner2);
 
-        System.out.println("Owners Loaded");
+        System.out.println("Owners and Pets Loaded");
+
+        Visit catVisit = new Visit();
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Cat Visit for Sneezing");
+        catVisit.setPet(varunPet);
+        visitService.save(catVisit);
+
+        System.out.println("Visits Loaded");
+
 
         Vet vet1 = new Vet();
         vet1.setFirstName("Deepak");
